@@ -1,4 +1,4 @@
-package com.tennisparty.constant;
+package com.tennisparty.constants;
 
 public enum Point {
     ZERO("0"),

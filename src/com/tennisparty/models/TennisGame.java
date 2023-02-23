@@ -1,5 +1,7 @@
-import com.tennisparty.constant.GameStatus;
-import com.tennisparty.model.Set;
+package com.tennisparty.models;
+
+import com.tennisparty.constants.GameStatus;
+import com.tennisparty.models.Set;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +12,36 @@ public class TennisGame {
     private String player1;
 
     private String player2;
-    private List<Set> scoreSets = new ArrayList<>();
+
+    private List<Set> sets = new ArrayList<>();
+
     private Set currentSet = new Set();
+
     private GameStatus gameStatus = GameStatus.IN_PROGRESS;
 
+    public TennisGame(String player1, String player2) {
+        this.player1 = player1;
+        this.player2 = player2;
+    }
+
+    public Set getCurrentSet() {
+        return currentSet;
+    }
+
+    public void setCurrentSet(Set currentSet) {
+        this.currentSet = currentSet;
+    }
+
+    public List<Set> getSets() {
+        return sets;
+    }
+
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
+    }
+
     public String showScore(){
-        return scoreSets.stream()
+        return sets.stream()
                 .map(Set::getSetScore)
                 // Chaque score de chaque set est joint pour former le score global de la partie
                 .collect(Collectors.joining(" "));

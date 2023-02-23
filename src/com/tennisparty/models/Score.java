@@ -1,4 +1,4 @@
-package com.tennisparty.model;
+package com.tennisparty.models;
 
 public class Score<X> {
     private X scorePlayer1;

@@ -1,6 +1,6 @@
-package com.tennisparty.model;
+package com.tennisparty.models;
 
-import com.tennisparty.constant.Point;
+import com.tennisparty.constants.Point;
 
 public class Set {
 
@@ -19,20 +19,16 @@ public class Set {
         this.points = points;
     }
 
-    public Score<Point> getCurrentPoint() {
-        return currentPoint;
-    }
-
     public void setCurrentPoint(Score<Point> currentPoint) {
         this.currentPoint = currentPoint;
     }
 
-    public Score<Integer> getTieBreak() {
-        return tieBreak;
+    public Score<Point> getCurrentPoint() {
+        return currentPoint;
     }
 
-    public void setTieBreak(Score<Integer> tieBreak) {
-        this.tieBreak = tieBreak;
+    public Score<Integer> getTieBreak() {
+        return tieBreak;
     }
 
     public String getSetScore() {
