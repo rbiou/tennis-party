@@ -1,12 +1,19 @@
 package com.tennisparty.models;
 
+/**
+ * Modèle de score générique définissant une paire de valeur associé à un jeu ou un @Set selon le contexte
+ * @param <X> selon le contexte, une paire de @Point dans le cadre d'un jeu
+ *           ou une paire d'entiers dans le cadre d'un @Set
+ */
 public class Score<X> {
+    /**
+     * Le score du joueur 1
+     */
     private X scorePlayer1;
+    /**
+     * Le score du joueur 2
+     */
     private X scorePlayer2;
-
-    public Score() {
-        super();
-    }
 
     public Score(X scorePlayer1, X scorePlayer2) {
         super();
