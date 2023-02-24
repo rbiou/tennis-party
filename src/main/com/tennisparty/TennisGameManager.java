@@ -2,32 +2,70 @@ package com.tennisparty;
 
 import com.tennisparty.constants.GameStatus;
 import com.tennisparty.constants.Point;
+import com.tennisparty.helpers.PromptHelper;
 import com.tennisparty.models.Score;
 import com.tennisparty.models.Set;
 import com.tennisparty.models.TennisGame;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Gestionnaire de match de tennis @TennisGame
  */
 public class TennisGameManager {
+
     /**
      * Le match de tennis géré
      */
     private TennisGame game;
 
     /**
-     * Méthode initiant un nouveau match de tennis et sa gestion : le premier set est créé et les joueurs sont
-     * définis
-     * @param player1 le nom du joueur 1
-     * @param player2 le nom du joueur 2
-     * @return le match @TennisMatch nouvellement créé
+     * Constructeur permettant d'initier un match de tennis
      */
-    public TennisGame initGame(String player1, String player2){
-        game = new TennisGame(player1, player2);
+    public TennisGameManager() {
+        game = new TennisGame();
         Set initialSet = new Set();
         game.setCurrentSet(initialSet);
         game.getSets().add(initialSet);
+    }
+
+    public TennisGame getGame() {
         return game;
+    }
+
+    /**
+     * Méthode initiant un nouveau match de tennis et sa gestion : le premier set est créé et les joueurs sont
+     * définis
+     * @return le match @TennisMatch nouvellement créé
+     */
+    public void initGame() throws InterruptedException {
+        String p1 = PromptHelper.readText("Entrer player 1 : ");
+        String p2 = PromptHelper.readText("Entrer player 2 : ");
+        game.setPlayer1(p1);
+        game.setPlayer2(p2);
+
+        boolean a = false;
+        do {
+            // Saisie de l'action
+            String action = PromptHelper.readText("Entrer action (P1 = joueur 1 gagnant, P2 = joueur 2 gagnant," +
+                    "SCORE = voir le score, NOW = voir le jeu en cours, MATCH : voir le statut du match => ");
+            if (action.equals("P1") || action.equals("P2")) {
+                scorePoint(game, action.equals("P1") ? true : false);
+                System.out.println(game.showScore());
+                System.out.println(game.showCurrentPointStatus());
+            } else if (action.equals("SCORE")) {
+                System.out.println(game.showScore());
+            } else if (action.equals("NOW")) {
+                System.out.println(game.showCurrentPointStatus());
+            } else if (action.equals("MATCH")) {
+                System.out.println(game.getGameStatus().label);
+            }
+
+            game.showScore();
+            game.showCurrentPointStatus();
+
+            TimeUnit.SECONDS.sleep(1);
+        } while (!a);
     }
 
     /**

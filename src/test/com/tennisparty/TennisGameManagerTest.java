@@ -13,7 +13,7 @@ class TennisGameManagerTest {
     @Test
     void scorePoint() {
         TennisGameManager aTennisGameManager = new TennisGameManager();
-        TennisGame aTennisGame = aTennisGameManager.initGame("p1Test", "p2Test");
+        TennisGame aTennisGame = aTennisGameManager.getGame();
         aTennisGameManager.scorePoint(aTennisGame, true);
         assertEquals("15 - 0", aTennisGame.showCurrentPointStatus());
         assertEquals("0-0", aTennisGame.showScore());
@@ -22,7 +22,7 @@ class TennisGameManagerTest {
     @Test
     void scorePointFifteenToThirty() {
         TennisGameManager aTennisGameManager = new TennisGameManager();
-        TennisGame aTennisGame = aTennisGameManager.initGame("p1Test", "p2Test");
+        TennisGame aTennisGame = aTennisGameManager.getGame();
         aTennisGame.getCurrentSet().setCurrentPoint(new Score<>(Point.FIFTEEN, Point.ZERO));
         aTennisGameManager.scorePoint(aTennisGame, true);
         assertEquals("30 - 0", aTennisGame.showCurrentPointStatus());
@@ -31,7 +31,7 @@ class TennisGameManagerTest {
     @Test
     void scorePointToDeuce() {
         TennisGameManager aTennisGameManager = new TennisGameManager();
-        TennisGame aTennisGame = aTennisGameManager.initGame("p1Test", "p2Test");
+        TennisGame aTennisGame = aTennisGameManager.getGame();
         aTennisGame.getCurrentSet().setCurrentPoint(new Score<>(Point.FOURTY, Point.THIRTY));
         aTennisGameManager.scorePoint(aTennisGame, false);
         assertEquals("Deuce", aTennisGame.showCurrentPointStatus());
@@ -40,7 +40,7 @@ class TennisGameManagerTest {
     @Test
     void scorePointAdvantageP2() {
         TennisGameManager aTennisGameManager = new TennisGameManager();
-        TennisGame aTennisGame = aTennisGameManager.initGame("p1Test", "p2Test");
+        TennisGame aTennisGame = aTennisGameManager.getGame();
         aTennisGame.getCurrentSet().setCurrentPoint(new Score<>(Point.DEUCE, Point.DEUCE));
         aTennisGameManager.scorePoint(aTennisGame, false);
         assertEquals("40 - Advantage", aTennisGame.showCurrentPointStatus());
@@ -49,7 +49,7 @@ class TennisGameManagerTest {
     @Test
     void scorePointAdvantageP2ToDeuce() {
         TennisGameManager aTennisGameManager = new TennisGameManager();
-        TennisGame aTennisGame = aTennisGameManager.initGame("p1Test", "p2Test");
+        TennisGame aTennisGame = aTennisGameManager.getGame();
         aTennisGame.getCurrentSet().setCurrentPoint(new Score<>(Point.FOURTY, Point.ADVANTAGE));
         aTennisGameManager.scorePoint(aTennisGame, true);
         assertEquals("Deuce", aTennisGame.showCurrentPointStatus());
@@ -58,7 +58,7 @@ class TennisGameManagerTest {
     @Test
     void scorePointAdvantageP2ToWinPoint() {
         TennisGameManager aTennisGameManager = new TennisGameManager();
-        TennisGame aTennisGame = aTennisGameManager.initGame("p1Test", "p2Test");
+        TennisGame aTennisGame = aTennisGameManager.getGame();
         aTennisGame.getCurrentSet().setCurrentPoint(new Score<>(Point.FOURTY, Point.ADVANTAGE));
         aTennisGameManager.scorePoint(aTennisGame, false);
         assertEquals("0 - 0", aTennisGame.showCurrentPointStatus());
@@ -68,7 +68,7 @@ class TennisGameManagerTest {
     @Test
     void scorePointThirtyToFourty() {
         TennisGameManager aTennisGameManager = new TennisGameManager();
-        TennisGame aTennisGame = aTennisGameManager.initGame("p1Test", "p2Test");
+        TennisGame aTennisGame = aTennisGameManager.getGame();
         aTennisGame.getCurrentSet().setCurrentPoint(new Score<>(Point.THIRTY, Point.ZERO));
         aTennisGameManager.scorePoint(aTennisGame, true);
         assertEquals("40 - 0", aTennisGame.showCurrentPointStatus());
@@ -77,7 +77,7 @@ class TennisGameManagerTest {
     @Test
     void scorePointWinAPoint() {
         TennisGameManager aTennisGameManager = new TennisGameManager();
-        TennisGame aTennisGame = aTennisGameManager.initGame("p1Test", "p2Test");
+        TennisGame aTennisGame = aTennisGameManager.getGame();
         aTennisGame.getCurrentSet().setCurrentPoint(new Score<>(Point.FOURTY, Point.ZERO));
         aTennisGameManager.scorePoint(aTennisGame, true);
         assertEquals("0 - 0", aTennisGame.showCurrentPointStatus());
@@ -87,7 +87,7 @@ class TennisGameManagerTest {
     @Test
     void scorePointWinAPointAndASet() {
         TennisGameManager aTennisGameManager = new TennisGameManager();
-        TennisGame aTennisGame = aTennisGameManager.initGame("p1Test", "p2Test");
+        TennisGame aTennisGame = aTennisGameManager.getGame();
         aTennisGame.getCurrentSet().setPoints(new Score<>(5, 2));
         aTennisGame.getCurrentSet().setCurrentPoint(new Score<>(Point.FOURTY, Point.ZERO));
         aTennisGameManager.scorePoint(aTennisGame, true);
@@ -98,7 +98,7 @@ class TennisGameManagerTest {
     @Test
     void scorePointP1WinAPointAndASetAndAMatch() {
         TennisGameManager aTennisGameManager = new TennisGameManager();
-        TennisGame aTennisGame = aTennisGameManager.initGame("p1Test", "p2Test");
+        TennisGame aTennisGame = aTennisGameManager.getGame();
         Set a1StSet = aTennisGame.getCurrentSet();
         a1StSet.setPoints(new Score<>(6,2));
         Set a2ndSet = new Set();
@@ -118,7 +118,7 @@ class TennisGameManagerTest {
     @Test
     void scorePointP2WinAPointAndASetAndAMatch() {
         TennisGameManager aTennisGameManager = new TennisGameManager();
-        TennisGame aTennisGame = aTennisGameManager.initGame("p1Test", "p2Test");
+        TennisGame aTennisGame = aTennisGameManager.getGame();
         Set a1StSet = aTennisGame.getCurrentSet();
         a1StSet.setPoints(new Score<>(2,6));
         Set a2ndSet = new Set();
@@ -138,7 +138,7 @@ class TennisGameManagerTest {
     @Test
     void scorePointWinAPointAndGoToTieBreak() {
         TennisGameManager aTennisGameManager = new TennisGameManager();
-        TennisGame aTennisGame = aTennisGameManager.initGame("p1Test", "p2Test");
+        TennisGame aTennisGame = aTennisGameManager.getGame();
         Set a1StSet = aTennisGame.getCurrentSet();
         a1StSet.setPoints(new Score<>(5,6));
         aTennisGame.getCurrentSet().setCurrentPoint(new Score<>(Point.FOURTY, Point.ZERO));
@@ -150,7 +150,7 @@ class TennisGameManagerTest {
     @Test
     void scorePointP1WinAPointInTieBreak() {
         TennisGameManager aTennisGameManager = new TennisGameManager();
-        TennisGame aTennisGame = aTennisGameManager.initGame("p1Test", "p2Test");
+        TennisGame aTennisGame = aTennisGameManager.getGame();
         Set a1StSet = aTennisGame.getCurrentSet();
         a1StSet.setPoints(new Score<>(5,6));
         aTennisGame.getCurrentSet().setCurrentPoint(new Score<>(Point.FOURTY, Point.ZERO));
@@ -163,7 +163,7 @@ class TennisGameManagerTest {
     @Test
     void scorePointP2WinAPointInTieBreak() {
         TennisGameManager aTennisGameManager = new TennisGameManager();
-        TennisGame aTennisGame = aTennisGameManager.initGame("p1Test", "p2Test");
+        TennisGame aTennisGame = aTennisGameManager.getGame();
         Set a1StSet = aTennisGame.getCurrentSet();
         a1StSet.setPoints(new Score<>(6,5));
         aTennisGame.getCurrentSet().setCurrentPoint(new Score<>(Point.ZERO, Point.FOURTY));
@@ -176,7 +176,7 @@ class TennisGameManagerTest {
     @Test
     void scorePointP1WinASetInTieBreak() {
         TennisGameManager aTennisGameManager = new TennisGameManager();
-        TennisGame aTennisGame = aTennisGameManager.initGame("p1Test", "p2Test");
+        TennisGame aTennisGame = aTennisGameManager.getGame();
         Set a1StSet = aTennisGame.getCurrentSet();
         a1StSet.setPoints(new Score<>(5,6));
         aTennisGame.getCurrentSet().setCurrentPoint(new Score<>(Point.FOURTY, Point.ZERO));
@@ -191,7 +191,7 @@ class TennisGameManagerTest {
     @Test
     void scorePointP2WinASetInTieBreak() {
         TennisGameManager aTennisGameManager = new TennisGameManager();
-        TennisGame aTennisGame = aTennisGameManager.initGame("p1Test", "p2Test");
+        TennisGame aTennisGame = aTennisGameManager.getGame();
         Set a1StSet = aTennisGame.getCurrentSet();
         a1StSet.setPoints(new Score<>(6,5));
         aTennisGame.getCurrentSet().setCurrentPoint(new Score<>(Point.ZERO, Point.FOURTY));
@@ -206,7 +206,7 @@ class TennisGameManagerTest {
     @Test
     void scorePointP1WinASetAndAMatchInTieBreak() {
         TennisGameManager aTennisGameManager = new TennisGameManager();
-        TennisGame aTennisGame = aTennisGameManager.initGame("p1Test", "p2Test");
+        TennisGame aTennisGame = aTennisGameManager.getGame();
         Set a1StSet = aTennisGame.getCurrentSet();
         a1StSet.setPoints(new Score<>(6,2));
         Set a2ndSet = new Set();

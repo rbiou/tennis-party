@@ -29,7 +29,6 @@ public class TennisGame {
      */
     private List<Set> sets = new ArrayList<>();
 
-
     /**
      * Set en cours, correspondant à un set de la liste des sets @Set du match
      */
@@ -39,6 +38,16 @@ public class TennisGame {
 
     public TennisGame(String player1, String player2) {
         this.player1 = player1;
+        this.player2 = player2;
+    }
+
+    public TennisGame(){}
+
+    public void setPlayer1(String player1) {
+        this.player1 = player1;
+    }
+
+    public void setPlayer2(String player2) {
         this.player2 = player2;
     }
 
